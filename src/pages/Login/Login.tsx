@@ -1,12 +1,27 @@
-import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { signIn } from "../../services/AuthService";
 import { useLogin } from "./Login.logic";
 
 function Login() {
-  const { navigate, setUser, username, setUserName, password, setPassword } =
-    useLogin();
+  const {
+    navigate,
+    setUser,
+    username,
+    setUserName,
+    password,
+    setPassword,
+    error,
+    setError,
+  } = useLogin();
 
   return (
     <>
@@ -48,7 +63,9 @@ function Login() {
         <Tooltip title="All the fields are required">
           <span>
             <Button
-              onClick={() => signIn({ username, password, setUser, navigate })}
+              onClick={() =>
+                signIn({ username, password, setUser, navigate, setError })
+              }
               variant="contained"
               disabled={!username || !password}
             >
@@ -62,6 +79,13 @@ function Login() {
           <Link to="/register">Create your account here</Link>
         </Typography>
       </Box>
+      {!!error && (
+        <Box m={2}>
+          <Alert variant="filled" severity="error">
+            {error}
+          </Alert>
+        </Box>
+      )}
     </>
   );
 }

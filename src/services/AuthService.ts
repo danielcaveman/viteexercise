@@ -13,9 +13,11 @@ export async function signIn({
   username,
   password,
   setUser,
+  setError,
   navigate,
 }: Props & {
   setUser: Dispatch<SetStateAction<null>>;
+  setError: Dispatch<SetStateAction<string | undefined>>;
   navigate: NavigateFunction;
 }) {
   try {
@@ -25,8 +27,15 @@ export async function signIn({
       body: JSON.stringify({ username, password }),
     });
 
-    const user = await response.json();
-    await setUser(user);
+    const data = await response.json();
+
+    if (data.errors) {
+      const error: string = data.errors[0].detail || "Failed to authenticate";
+      setError(error);
+      throw new Error(error);
+    }
+
+    await setUser(data);
     navigate("/");
   } catch (error) {
     console.error(error);

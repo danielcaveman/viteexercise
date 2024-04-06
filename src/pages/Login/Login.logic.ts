@@ -7,6 +7,7 @@ export function useLogin() {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | undefined>(undefined);
 
   return {
     navigate,
@@ -15,5 +16,7 @@ export function useLogin() {
     setUserName,
     password,
     setPassword,
+    error,
+    setError,
   };
 }
