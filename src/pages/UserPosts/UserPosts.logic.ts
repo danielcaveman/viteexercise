@@ -7,6 +7,7 @@ import {
 } from "../../services/PostsService";
 
 export function useUserPosts() {
+  // const { user } = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [posts, setPosts] = useState<Post[]>([]);

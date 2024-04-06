@@ -1,8 +1,10 @@
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { signIn } from "../../services/AuthService";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 function Login() {
+  const { setUser } = useContext(AuthContext);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -46,7 +48,7 @@ function Login() {
         <Tooltip title="All the fields are required">
           <span>
             <Button
-              onClick={() => signIn({ username, password })}
+              onClick={() => signIn({ username, password, setUser })}
               variant="contained"
               disabled={!username || !password}
             >

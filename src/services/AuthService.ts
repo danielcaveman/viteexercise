@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { apiUrl, headers } from "../constants/constants";
 
 type Props = {
@@ -7,13 +8,20 @@ type Props = {
   lastName?: string;
 };
 
-export async function signIn({ username, password }: Props) {
+export async function signIn({
+  username,
+  password,
+  setUser,
+}: Props & { setUser: Dispatch<SetStateAction<null>> }) {
   try {
-    await fetch(`${apiUrl}/users/auth`, {
+    const response = await fetch(`${apiUrl}/users/auth`, {
       method: "POST",
       headers,
       body: JSON.stringify({ username, password }),
     });
+
+    const user = await response.json();
+    setUser(user);
   } catch (error) {
     console.error(error);
   }
