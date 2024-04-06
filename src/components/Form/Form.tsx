@@ -1,13 +1,17 @@
 import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Post } from "../../pages/UserPosts/UserPosts.logic";
+import { ChangeEvent, useState } from "react";
+import { Post } from "../../services/PostsService";
 
 type Props = {
   onSubmit: (post: Post) => void;
 };
 
 export default function Form({ onSubmit }: Props) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   return (
     <>
       <Box
@@ -24,11 +28,21 @@ export default function Form({ onSubmit }: Props) {
           Welcome username!
         </Typography>
 
-        <TextField id="title" label="Title" defaultValue="" />
         <TextField
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setTitle(event.target.value)
+          }
+          id="title"
+          label="Title"
+          value={title}
+        />
+        <TextField
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setContent(event.target.value)
+          }
           id="description"
           label="Description"
-          defaultValue=""
+          value={content}
           multiline
           minRows={4}
           maxRows={4}
@@ -36,9 +50,7 @@ export default function Form({ onSubmit }: Props) {
       </Box>
       <Box ml={2}>
         <Button
-          onClick={() =>
-            onSubmit({ title: "New post", content: "New content" })
-          }
+          onClick={() => onSubmit({ title, content })}
           variant="contained"
         >
           Post

@@ -1,25 +1,19 @@
 import { useState, useEffect } from "react";
-import { fetchAPI } from "../../services/Requests";
-
-export type Post = {
-  id?: number;
-  title: string;
-  content: string;
-};
+import { Post, fetchPosts, createPost } from "../../services/PostsService";
 
 export function useUserPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    fetchAPI(setPosts);
+    fetchPosts(setPosts);
   }, []);
 
-  const createPost = (post: Post) => {
-    console.log(post);
+  const onPostSubmit = (post: Post) => {
+    createPost(post);
   };
 
   return {
-    createPost,
+    onPostSubmit,
     posts,
   };
 }
