@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { signUp } from "../../services/AuthService";
+import { Link } from "react-router-dom";
 
 function Registration() {
   const [username, setUserName] = useState("");
@@ -75,6 +76,11 @@ function Registration() {
             </Button>
           </span>
         </Tooltip>
+      </Box>
+      <Box m={2}>
+        <Typography variant="subtitle1" component="p">
+          <Link to="/login">Return to login</Link>
+        </Typography>
       </Box>
     </>
   );

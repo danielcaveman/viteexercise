@@ -2,6 +2,7 @@ import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
 import { ChangeEvent, useContext, useState } from "react";
 import { signIn } from "../../services/AuthService";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+import { Link } from "react-router-dom";
 
 function Login() {
   const { setUser } = useContext(AuthContext);
@@ -56,6 +57,11 @@ function Login() {
             </Button>
           </span>
         </Tooltip>
+      </Box>
+      <Box m={2}>
+        <Typography variant="subtitle1" component="p">
+          <Link to="/register">Create your account here</Link>
+        </Typography>
       </Box>
     </>
   );
