@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Post,
   fetchPosts,
@@ -7,21 +7,27 @@ import {
 } from "../../services/PostsService";
 
 export function useUserPosts() {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [posts, setPosts] = useState<Post[]>([]);
 
+  const fetchPages = useCallback(() => {
+    return fetchPosts({ setPosts, page, setTotalPages });
+  }, [page, setTotalPages]);
+
   useEffect(() => {
-    fetchPosts(setPosts);
-  }, []);
+    fetchPages();
+  }, [fetchPages]);
 
   const onPostSubmit = async (post: Post) => {
     await createPost(post);
-    await fetchPosts(setPosts);
+    fetchPages();
   };
 
   const onPostDelete = async (id?: number) => {
     if (id) {
       await deletePost(id);
-      await fetchPosts(setPosts);
+      fetchPages();
     }
   };
 
@@ -29,5 +35,7 @@ export function useUserPosts() {
     onPostSubmit,
     onPostDelete,
     posts,
+    setPage,
+    totalPages,
   };
 }

@@ -1,9 +1,10 @@
 import Form from "../../components/PostForm/PostForm";
 import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
+import { Pagination } from "@mui/material";
 
 function UserPosts() {
-  const { onPostSubmit, onPostDelete, posts } = useUserPosts();
+  const { onPostSubmit, onPostDelete, posts, totalPages } = useUserPosts();
 
   return (
     <>
@@ -18,6 +19,8 @@ function UserPosts() {
           content={content}
         />
       ))}
+
+      {!!posts.length && <Pagination count={totalPages} size="small" />}
     </>
   );
 }
