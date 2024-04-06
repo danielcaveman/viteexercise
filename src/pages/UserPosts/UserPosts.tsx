@@ -3,11 +3,11 @@ import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
 
 function UserPosts() {
-  const { posts } = useUserPosts();
+  const { createPost, posts } = useUserPosts();
 
   return (
     <>
-      <Form />
+      <Form onSubmit={createPost} />
 
       {posts.map(({ id, title, content }) => (
         <Post key={id} title={title} description={content} />

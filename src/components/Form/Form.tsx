@@ -1,8 +1,13 @@
 import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { Post } from "../../pages/UserPosts/UserPosts.logic";
 
-export default function Form() {
+type Props = {
+  onSubmit: (post: Post) => void;
+};
+
+export default function Form({ onSubmit }: Props) {
   return (
     <>
       <Box
@@ -30,7 +35,14 @@ export default function Form() {
         />
       </Box>
       <Box ml={2}>
-        <Button variant="contained">Post</Button>
+        <Button
+          onClick={() =>
+            onSubmit({ title: "New post", content: "New content" })
+          }
+          variant="contained"
+        >
+          Post
+        </Button>
       </Box>
     </>
   );

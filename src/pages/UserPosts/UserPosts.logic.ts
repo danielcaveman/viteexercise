@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchAPI } from "../../services/Requests";
 
-type Post = {
-  id: number;
+export type Post = {
+  id?: number;
   title: string;
   content: string;
 };
@@ -14,7 +14,12 @@ export function useUserPosts() {
     fetchAPI(setPosts);
   }, []);
 
+  const createPost = (post: Post) => {
+    console.log(post);
+  };
+
   return {
+    createPost,
     posts,
   };
 }
