@@ -1,27 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import Header from "./components/Header/Header";
 import Layout from "./components/Layout/Layout";
-import UserPosts from "./pages/UserPosts/UserPosts";
-import Login from "./pages/Login/Login";
-import Registration from "./pages/Registration/Registration";
 import { AuthContext } from "./contexts/AuthContext/AuthContext";
 import { useState } from "react";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <UserPosts />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Registration />,
-  },
-]);
+import { router } from "./configurations/Router";
 
 function App() {
   const [user, setUser] = useState(null);
