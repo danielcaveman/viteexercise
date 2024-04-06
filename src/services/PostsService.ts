@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { apiUrl, headers } from "../constants/constants";
+import { Headers, apiUrl, headers } from "../constants/constants";
 import { User } from "../contexts/AuthContext/AuthContext";
 
 const limit = 5;
@@ -47,7 +47,7 @@ export async function fetchPosts({
   }
 }
 
-export async function createPost(post: Post) {
+export async function createPost(post: Post, headers: Headers) {
   try {
     await fetch(`${apiUrl}/posts`, {
       method: "POST",
@@ -59,7 +59,7 @@ export async function createPost(post: Post) {
   }
 }
 
-export async function deletePost(id: number) {
+export async function deletePost(id: number, headers: Headers) {
   try {
     await fetch(`${apiUrl}/posts/${id}`, {
       method: "DELETE",
