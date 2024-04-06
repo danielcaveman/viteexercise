@@ -1,7 +1,8 @@
-import { Box, Button } from "@mui/material";
+import { Box, CardActions, IconButton } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Post } from "../../services/PostsService";
 
 export default function PostComponent({
@@ -18,10 +19,12 @@ export default function PostComponent({
             {title}
           </Typography>
           <Typography variant="body2">{content}</Typography>
-          <Button onClick={() => onDelete(id)} variant="contained">
-            Delete
-          </Button>
         </CardContent>
+        <CardActions sx={{ float: "right" }}>
+          <IconButton onClick={() => onDelete(id)} aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
       </Card>
     </Box>
   );
