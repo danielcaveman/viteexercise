@@ -24,11 +24,9 @@ export function useUserPosts() {
     fetchPages();
   };
 
-  const onPostDelete = async (id?: number) => {
-    if (id) {
-      await deletePost(id);
-      fetchPages();
-    }
+  const onPostDelete = async (id: number) => {
+    await deletePost(id);
+    fetchPages();
   };
 
   return {

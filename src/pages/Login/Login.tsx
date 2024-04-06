@@ -38,6 +38,7 @@ function Login() {
           }
           id="password"
           label="Password"
+          type="password"
           value={password}
         />
       </Box>

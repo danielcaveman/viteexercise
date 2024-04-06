@@ -10,7 +10,7 @@ export default function PostComponent({
   title,
   content,
   onDelete,
-}: Post & { onDelete: (id?: number) => void }) {
+}: Post & { onDelete: (id: number) => void }) {
   return (
     <Box m={2}>
       <Card sx={{ minWidth: 275 }}>
@@ -21,7 +21,7 @@ export default function PostComponent({
           <Typography variant="body2">{content}</Typography>
         </CardContent>
         <CardActions sx={{ float: "right" }}>
-          <IconButton onClick={() => onDelete(id)} aria-label="delete">
+          <IconButton onClick={() => id && onDelete(id)} aria-label="delete">
             <DeleteIcon />
           </IconButton>
         </CardActions>
