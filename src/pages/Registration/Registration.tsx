@@ -1,13 +1,20 @@
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { signUp } from "../../services/AuthService";
 import { Link } from "react-router-dom";
+import { useRegistration } from "./Registration.logic";
 
 function Registration() {
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const {
+    username,
+    setUserName,
+    password,
+    setPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+  } = useRegistration();
 
   return (
     <>

@@ -1,14 +1,12 @@
 import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import { signIn } from "../../services/AuthService";
-import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useLogin } from "./Login.logic";
 
 function Login() {
-  const { setUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const { navigate, setUser, username, setUserName, password, setPassword } =
+    useLogin();
 
   return (
     <>
