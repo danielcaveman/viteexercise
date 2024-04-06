@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Tooltip, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
@@ -8,7 +8,7 @@ type Props = {
   onSubmit: (post: Post) => void;
 };
 
-export default function Form({ onSubmit }: Props) {
+export default function PostForm({ onSubmit }: Props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -51,13 +51,17 @@ export default function Form({ onSubmit }: Props) {
         />
       </Box>
       <Box ml={2}>
-        <Button
-          onClick={() => onSubmit({ title, content })}
-          variant="contained"
-          disabled={!title || !content}
-        >
-          Post
-        </Button>
+        <Tooltip title="All the fields are required">
+          <span>
+            <Button
+              onClick={() => onSubmit({ title, content })}
+              variant="contained"
+              disabled={!title || !content}
+            >
+              Post
+            </Button>
+          </span>
+        </Tooltip>
       </Box>
     </>
   );

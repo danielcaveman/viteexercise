@@ -1,4 +1,4 @@
-import Form from "../../components/Form/Form";
+import Form from "../../components/PostForm/PostForm";
 import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
 
