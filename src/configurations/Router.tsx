@@ -1,7 +1,7 @@
-import { Login } from "@mui/icons-material";
 import { createBrowserRouter } from "react-router-dom";
 import Registration from "../pages/Registration/Registration";
 import UserPosts from "../pages/UserPosts/UserPosts";
+import Login from "../pages/Login/Login";
 
 export const router = createBrowserRouter([
   {

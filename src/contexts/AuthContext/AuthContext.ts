@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, createContext } from "react";
 
-type User = {
+export type User = {
   accessToken: string;
   created: string;
   firstName: string;

@@ -13,11 +13,9 @@ export function useUserPosts() {
   const [totalPages, setTotalPages] = useState(0);
   const [posts, setPosts] = useState<Post[]>([]);
 
-  console.log(user);
-
   const fetchPages = useCallback(() => {
-    return fetchPosts({ setPosts, page, setTotalPages });
-  }, [page, setTotalPages]);
+    return fetchPosts({ setPosts, page, setTotalPages, user });
+  }, [page, setTotalPages, user]);
 
   useEffect(() => {
     fetchPages();
@@ -40,5 +38,6 @@ export function useUserPosts() {
     page,
     setPage,
     totalPages,
+    user,
   };
 }
