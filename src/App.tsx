@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Layout from "./components/Layout/Layout";
 import UserPosts from "./pages/UserPosts/UserPosts";
 import Login from "./pages/Login/Login";
+import Registration from "./pages/Registration/Registration";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Registration />,
   },
 ]);
 
