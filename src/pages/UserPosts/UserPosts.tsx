@@ -36,7 +36,7 @@ function UserPosts() {
         />
       ))}
 
-      {!!posts.length && (
+      {!!posts?.length && (
         <Pagination
           count={totalPages}
           page={page}
