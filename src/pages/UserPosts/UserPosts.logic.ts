@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { Post, fetchPosts, createPost } from "../../services/PostsService";
+import {
+  Post,
+  fetchPosts,
+  createPost,
+  deletePost,
+} from "../../services/PostsService";
 
 export function useUserPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -12,8 +17,15 @@ export function useUserPosts() {
     createPost(post);
   };
 
+  const onPostDelete = (id?: number) => {
+    if (id) {
+      deletePost(id);
+    }
+  };
+
   return {
     onPostSubmit,
+    onPostDelete,
     posts,
   };
 }

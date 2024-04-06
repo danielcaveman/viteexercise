@@ -3,14 +3,20 @@ import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
 
 function UserPosts() {
-  const { onPostSubmit, posts } = useUserPosts();
+  const { onPostSubmit, onPostDelete, posts } = useUserPosts();
 
   return (
     <>
       <Form onSubmit={onPostSubmit} />
 
       {posts.map(({ id, title, content }) => (
-        <Post key={id} title={title} description={content} />
+        <Post
+          onDelete={onPostDelete}
+          key={id}
+          id={id}
+          title={title}
+          content={content}
+        />
       ))}
     </>
   );

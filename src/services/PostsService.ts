@@ -39,3 +39,14 @@ export async function createPost(post: Post) {
     console.error(error);
   }
 }
+
+export async function deletePost(id: number) {
+  try {
+    await fetch(`${apiUrl}/posts/${id}`, {
+      method: "DELETE",
+      headers,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
