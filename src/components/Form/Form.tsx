@@ -29,6 +29,7 @@ export default function Form({ onSubmit }: Props) {
         </Typography>
 
         <TextField
+          error={!title}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setTitle(event.target.value)
           }
@@ -37,6 +38,7 @@ export default function Form({ onSubmit }: Props) {
           value={title}
         />
         <TextField
+          error={!content}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setContent(event.target.value)
           }
@@ -52,6 +54,7 @@ export default function Form({ onSubmit }: Props) {
         <Button
           onClick={() => onSubmit({ title, content })}
           variant="contained"
+          disabled={!title || !content}
         >
           Post
         </Button>
