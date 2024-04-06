@@ -25,7 +25,7 @@ export default function PostForm({ onSubmit }: Props) {
         autoComplete="off"
       >
         <Typography variant="h5" component="h2">
-          Welcome username!
+          Create your post!
         </Typography>
 
         <TextField

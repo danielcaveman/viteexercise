@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
 const apiUrl = "http://13.40.200.183";
+const userId = 1;
 
 const headers = {
   "Content-Type": "application/json",
-  Authorization: "token-valid-for-1",
+  Authorization: `token-valid-for-${userId}`,
 };
 
 export type Post = {
@@ -15,7 +16,7 @@ export type Post = {
 
 export async function fetchPosts(callback: Dispatch<SetStateAction<Post[]>>) {
   try {
-    const response = await fetch(`${apiUrl}/posts`, {
+    const response = await fetch(`${apiUrl}/users/${userId}/posts`, {
       method: "GET",
       headers,
     });
