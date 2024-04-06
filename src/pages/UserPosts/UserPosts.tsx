@@ -1,4 +1,4 @@
-import Form from "../../components/PostForm/PostForm";
+import PostForm from "../../components/PostForm/PostForm";
 import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
 import Pagination from "../../components/Pagination/Pagination";
@@ -9,7 +9,7 @@ function UserPosts() {
 
   return (
     <>
-      <Form onSubmit={onPostSubmit} />
+      <PostForm onSubmit={onPostSubmit} />
 
       {posts.map(({ id, title, content }) => (
         <Post
