@@ -1,13 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
+import { apiUrl, headers, userId } from "../constants/constants";
 
-const apiUrl = "http://13.40.200.183";
-const userId = 2;
 const limit = 5;
-
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: `token-valid-for-${userId}`,
-};
 
 export type Post = {
   id?: number;
