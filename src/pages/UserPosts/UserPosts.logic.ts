@@ -13,13 +13,15 @@ export function useUserPosts() {
     fetchPosts(setPosts);
   }, []);
 
-  const onPostSubmit = (post: Post) => {
-    createPost(post);
+  const onPostSubmit = async (post: Post) => {
+    await createPost(post);
+    await fetchPosts(setPosts);
   };
 
-  const onPostDelete = (id?: number) => {
+  const onPostDelete = async (id?: number) => {
     if (id) {
-      deletePost(id);
+      await deletePost(id);
+      await fetchPosts(setPosts);
     }
   };
 
