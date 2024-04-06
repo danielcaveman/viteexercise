@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { apiUrl, headers } from "../constants/constants";
+import { NavigateFunction } from "react-router-dom";
 
 type Props = {
   username: string;
@@ -12,7 +13,11 @@ export async function signIn({
   username,
   password,
   setUser,
-}: Props & { setUser: Dispatch<SetStateAction<null>> }) {
+  navigate,
+}: Props & {
+  setUser: Dispatch<SetStateAction<null>>;
+  navigate: NavigateFunction;
+}) {
   try {
     const response = await fetch(`${apiUrl}/users/auth`, {
       method: "POST",
@@ -21,7 +26,8 @@ export async function signIn({
     });
 
     const user = await response.json();
-    setUser(user);
+    await setUser(user);
+    navigate("/");
   } catch (error) {
     console.error(error);
   }

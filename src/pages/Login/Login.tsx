@@ -2,10 +2,11 @@ import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
 import { ChangeEvent, useContext, useState } from "react";
 import { signIn } from "../../services/AuthService";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,7 +50,7 @@ function Login() {
         <Tooltip title="All the fields are required">
           <span>
             <Button
-              onClick={() => signIn({ username, password, setUser })}
+              onClick={() => signIn({ username, password, setUser, navigate })}
               variant="contained"
               disabled={!username || !password}
             >
