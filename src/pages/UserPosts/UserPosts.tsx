@@ -1,10 +1,11 @@
 import Form from "../../components/PostForm/PostForm";
 import Post from "../../components/Post/Post";
 import { useUserPosts } from "./UserPosts.logic";
-import { Pagination } from "@mui/material";
+import Pagination from "../../components/Pagination/Pagination";
 
 function UserPosts() {
-  const { onPostSubmit, onPostDelete, posts, totalPages } = useUserPosts();
+  const { onPostSubmit, onPostDelete, posts, totalPages, page, setPage } =
+    useUserPosts();
 
   return (
     <>
@@ -20,7 +21,13 @@ function UserPosts() {
         />
       ))}
 
-      {!!posts.length && <Pagination count={totalPages} size="small" />}
+      {!!posts.length && (
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(_, value) => setPage(value)}
+        />
+      )}
     </>
   );
 }

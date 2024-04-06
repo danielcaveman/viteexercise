@@ -35,6 +35,7 @@ export function useUserPosts() {
     onPostSubmit,
     onPostDelete,
     posts,
+    page,
     setPage,
     totalPages,
   };
