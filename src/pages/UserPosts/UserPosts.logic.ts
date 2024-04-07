@@ -16,7 +16,7 @@ export function useUserPosts() {
 
   const fetchPages = useCallback(() => {
     return postsService.fetchPosts({ setPosts, page, setTotalPages, user });
-  }, [page, postsService, user]);
+  }, [page, user]);
 
   useEffect(() => {
     fetchPages();
