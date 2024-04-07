@@ -15,9 +15,10 @@ describe("useLogin", () => {
     };
   }
 
-  it("return expected target including parameters for redirect", () => {
+  it("returns empty values for dorm fields", () => {
     const { result } = render();
 
     expect(result.current.username).toBe("");
+    expect(result.current.password).toBe("");
   });
 });
