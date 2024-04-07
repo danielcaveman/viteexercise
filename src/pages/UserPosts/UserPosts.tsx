@@ -9,7 +9,7 @@ function UserPosts() {
   const { onPostSubmit, onPostDelete, posts, totalPages, page, setPage, user } =
     useUserPosts();
 
-  if (!user) {
+  if (!user?.id) {
     return (
       <Box m={2}>
         <Typography variant="subtitle1" component="p">
