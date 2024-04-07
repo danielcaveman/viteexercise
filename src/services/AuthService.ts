@@ -47,13 +47,24 @@ export async function signUp({
   password,
   firstName,
   lastName,
-}: Props) {
+  setError,
+}: Props & {
+  setError: Dispatch<SetStateAction<string | undefined>>;
+}) {
   try {
-    await fetch(`${apiUrl}/users`, {
+    const response = await fetch(`${apiUrl}/users`, {
       method: "POST",
       headers,
       body: JSON.stringify({ username, password, firstName, lastName }),
     });
+
+    const data = await response.json();
+
+    if (data.errors) {
+      const error: string = data.errors[0].detail || "Failed to authenticate";
+      setError(error);
+      throw new Error(error);
+    }
   } catch (error) {
     console.error(error);
   }

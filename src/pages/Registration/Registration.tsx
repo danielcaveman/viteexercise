@@ -1,4 +1,11 @@
-import { Box, Button, TextField, Tooltip, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { ChangeEvent } from "react";
 import { signUp } from "../../services/AuthService";
 import { Link } from "react-router-dom";
@@ -14,6 +21,8 @@ function Registration() {
     setFirstName,
     lastName,
     setLastName,
+    error,
+    setError,
   } = useRegistration();
 
   return (
@@ -74,7 +83,7 @@ function Registration() {
           <span>
             <Button
               onClick={() =>
-                signUp({ username, password, firstName, lastName })
+                signUp({ username, password, firstName, lastName, setError })
               }
               variant="contained"
               disabled={!username || !password || !firstName || !lastName}
@@ -89,6 +98,13 @@ function Registration() {
           <Link to="/login">Return to login</Link>
         </Typography>
       </Box>
+      {!!error && (
+        <Box m={2}>
+          <Alert variant="filled" severity="error">
+            {error}
+          </Alert>
+        </Box>
+      )}
     </>
   );
 }

@@ -5,6 +5,7 @@ export function useRegistration() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [error, setError] = useState<string | undefined>(undefined);
 
   return {
     username,
@@ -15,5 +16,7 @@ export function useRegistration() {
     setFirstName,
     lastName,
     setLastName,
+    error,
+    setError,
   };
 }
