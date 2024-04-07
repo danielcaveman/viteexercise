@@ -1,10 +1,5 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import {
-  Post,
-  fetchPosts,
-  createPost,
-  deletePost,
-} from "../../services/PostsService";
+import { Post, PostsService } from "../../services/PostsService";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { headers } from "../../constants/constants";
 
@@ -17,22 +12,23 @@ export function useUserPosts() {
     ...headers,
     Authorization: `token-valid-for-${user?.id}`,
   };
+  const postsService = PostsService(updatedHeaders);
 
   const fetchPages = useCallback(() => {
-    return fetchPosts({ setPosts, page, setTotalPages, user });
-  }, [page, setTotalPages, user]);
+    return postsService.fetchPosts({ setPosts, page, setTotalPages, user });
+  }, [page, postsService, user]);
 
   useEffect(() => {
     fetchPages();
   }, [fetchPages]);
 
   const onPostSubmit = async (post: Post) => {
-    await createPost(post, updatedHeaders);
+    await postsService.createPost(post, updatedHeaders);
     fetchPages();
   };
 
   const onPostDelete = async (id: number) => {
-    await deletePost(id, updatedHeaders);
+    await postsService.deletePost(id, updatedHeaders);
     fetchPages();
   };
 
