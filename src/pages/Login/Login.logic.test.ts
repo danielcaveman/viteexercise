@@ -15,7 +15,7 @@ describe("useLogin", () => {
     };
   }
 
-  it("returns empty values for dorm fields", () => {
+  it("returns empty values for form fields", () => {
     const { result } = render();
 
     expect(result.current.username).toBe("");
