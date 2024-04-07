@@ -1,6 +1,6 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import { vi, it, describe } from "vitest";
+import { vi, it, describe, expect } from "vitest";
 import { render as renderComponent } from "@testing-library/react";
 import UserPosts from "./UserPosts";
 import * as logic from "./UserPosts.logic";
@@ -24,9 +24,9 @@ describe("UserPosts", () => {
     );
   }
 
-  it("test", () => {
-    const { debug } = render();
+  it("shows you are not logged message for user equals null", () => {
+    const { getByText } = render();
 
-    debug();
+    expect(getByText("You are not logged")).toBeDefined();
   });
 });
