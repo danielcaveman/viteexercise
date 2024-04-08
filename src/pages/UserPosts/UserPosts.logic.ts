@@ -9,6 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 export function useUserPosts() {
   const { user } = useContext(AuthContext);
+  const [showPagination, setShowPagination] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -18,6 +19,7 @@ export function useUserPosts() {
     if (response?.posts) {
       setPosts(response?.posts);
       setTotalPages(response?.totalPages || 0);
+      setShowPagination(response?.showPagination);
     }
   }, [page, user]);
 
@@ -43,5 +45,6 @@ export function useUserPosts() {
     setPage,
     totalPages,
     user,
+    showPagination,
   };
 }

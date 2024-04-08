@@ -18,6 +18,7 @@ type FetchPost = {
 type FetchPostResponse = {
   posts: Post[];
   totalPages: number;
+  showPagination: boolean;
 };
 
 export async function fetchPosts({
@@ -40,6 +41,7 @@ export async function fetchPosts({
     const data: FetchPostResponse = {
       posts: posts.items,
       totalPages,
+      showPagination: posts.totalCount > 0,
     };
 
     return data;

@@ -6,8 +6,16 @@ import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function UserPosts() {
-  const { onPostSubmit, onPostDelete, posts, totalPages, page, setPage, user } =
-    useUserPosts();
+  const {
+    onPostSubmit,
+    onPostDelete,
+    posts,
+    totalPages,
+    page,
+    setPage,
+    user,
+    showPagination,
+  } = useUserPosts();
 
   if (!user?.id) {
     return (
@@ -40,7 +48,7 @@ function UserPosts() {
         />
       ))}
 
-      {!!posts?.length && (
+      {showPagination && (
         <Pagination
           count={totalPages}
           page={page}
