@@ -15,9 +15,10 @@ export function useUserPosts() {
 
   const onFetchPosts = useCallback(async () => {
     const response = await fetchPosts({ page, user });
-
-    setPosts(response?.posts || []);
-    setTotalPages(response?.totalPages || 0);
+    if (response?.posts) {
+      setPosts(response?.posts);
+      setTotalPages(response?.totalPages || 0);
+    }
   }, [page, user]);
 
   useEffect(() => {

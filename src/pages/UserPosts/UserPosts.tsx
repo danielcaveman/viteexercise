@@ -11,14 +11,18 @@ function UserPosts() {
 
   if (!user?.id) {
     return (
-      <Box m={2}>
-        <Typography variant="subtitle1" component="p">
-          You are not logged
-        </Typography>
-        <Typography variant="subtitle1" component="p">
-          <Link to="/login">Click here to login!</Link>
-        </Typography>
-      </Box>
+      <>
+        <Box m={2}>
+          <Typography variant="h5" component="h2">
+            You are not logged
+          </Typography>
+        </Box>
+        <Box m={2}>
+          <Typography variant="subtitle1" component="p">
+            <Link to="/login">Click here to login!</Link>
+          </Typography>
+        </Box>
+      </>
     );
   }
 

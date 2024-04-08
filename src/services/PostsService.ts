@@ -15,10 +15,15 @@ type FetchPost = {
   user: User | null;
 };
 
+type FetchPostResponse = {
+  posts: Post[];
+  totalPages: number;
+};
+
 export async function fetchPosts({
   page,
   user,
-}: FetchPost): Promise<{ posts: Post[]; totalPages: number } | undefined> {
+}: FetchPost): Promise<FetchPostResponse | undefined> {
   try {
     if (!user) {
       return;
@@ -29,14 +34,12 @@ export async function fetchPosts({
       `${baseURL}/users/${user.id}/posts?limit=${limit}&offset=${offset}`
     );
 
-    const data:
-      | {
-          posts: Post[];
-          totalPages: number;
-        }
-      | undefined = {
-      posts: response.data.items,
-      totalPages: response.data.totalCount,
+    const posts = response.data;
+    const totalPages = Math.ceil(posts.totalCount / limit);
+
+    const data: FetchPostResponse = {
+      posts: posts.items,
+      totalPages,
     };
 
     return data;
