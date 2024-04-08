@@ -1,4 +1,4 @@
-export const apiUrl = "http://13.40.200.183";
+export const baseURL = "http://13.40.200.183";
 export const userId = 2;
 
 export type Headers = {

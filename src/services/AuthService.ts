@@ -1,6 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
-import { apiUrl, headers } from "../constants/constants";
+import { baseURL, headers } from "../constants/constants";
 import { NavigateFunction } from "react-router-dom";
+import axios from "axios";
+
+export const client = axios.create({
+  baseURL,
+});
+
+client.defaults.headers.common["Authorization"] = headers.Authorization;
 
 type Props = {
   username: string;
@@ -21,19 +28,21 @@ export async function signIn({
   navigate: NavigateFunction;
 }) {
   try {
-    const response = await fetch(`${apiUrl}/users/auth`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ username, password }),
+    const response = await client.post(`${baseURL}/users/auth`, {
+      username,
+      password,
     });
-
-    const data = await response.json();
+    const data = response.data;
 
     if (data.errors) {
       const error: string = data.errors[0].detail || "Failed to authenticate";
       setError(error);
       throw new Error(error);
     }
+
+    client.defaults.headers.common[
+      "Authorization"
+    ] = `token-valid-for-${data.id}`;
 
     await setUser(data);
     navigate("/");
@@ -52,13 +61,14 @@ export async function signUp({
   setError: Dispatch<SetStateAction<string | undefined>>;
 }) {
   try {
-    const response = await fetch(`${apiUrl}/users`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ username, password, firstName, lastName }),
+    const response = await client.post(`${baseURL}/users`, {
+      username,
+      password,
+      firstName,
+      lastName,
     });
 
-    const data = await response.json();
+    const data = response.data;
 
     if (data.errors) {
       const error: string = data.errors[0].detail || "Failed to authenticate";
