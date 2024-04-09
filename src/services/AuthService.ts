@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { baseURL, headers } from "../constants/constants";
 import { NavigateFunction } from "react-router-dom";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { User } from "../contexts/AuthContext/AuthContext";
 
 export const client = axios.create({
   baseURL,
@@ -34,12 +35,6 @@ export async function signIn({
     });
     const data = response.data;
 
-    if (data.errors) {
-      const error: string = data.errors[0].detail || "Failed to authenticate";
-      setError(error);
-      throw new Error(error);
-    }
-
     client.defaults.headers.common[
       "Authorization"
     ] = `token-valid-for-${data.id}`;
@@ -47,7 +42,11 @@ export async function signIn({
     await setUser(data);
     navigate("/");
   } catch (error) {
-    console.error(error);
+    if (error instanceof AxiosError) {
+      setError(error.response?.data.errors[0].detail);
+    } else {
+      setError("Login failed");
+    }
   }
 }
 
@@ -57,8 +56,10 @@ export async function signUp({
   firstName,
   lastName,
   setError,
+  setUser,
 }: Props & {
   setError: Dispatch<SetStateAction<string | undefined>>;
+  setUser: Dispatch<SetStateAction<User | undefined>>;
 }) {
   try {
     const response = await client.post(`${baseURL}/users`, {
@@ -70,12 +71,14 @@ export async function signUp({
 
     const data = response.data;
 
-    if (data.errors) {
-      const error: string = data.errors[0].detail || "Failed to authenticate";
-      setError(error);
-      throw new Error(error);
+    if (!data.errors) {
+      setUser(data);
     }
   } catch (error) {
-    console.error(error);
+    if (error instanceof AxiosError) {
+      setError(error.response?.data.errors[0].detail);
+    } else {
+      setError("Registration failed");
+    }
   }
 }

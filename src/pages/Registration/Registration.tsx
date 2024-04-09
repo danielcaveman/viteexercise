@@ -23,6 +23,8 @@ function Registration() {
     setLastName,
     error,
     setError,
+    setUser,
+    user,
   } = useRegistration();
 
   return (
@@ -83,7 +85,14 @@ function Registration() {
           <span>
             <Button
               onClick={() =>
-                signUp({ username, password, firstName, lastName, setError })
+                signUp({
+                  username,
+                  password,
+                  firstName,
+                  lastName,
+                  setError,
+                  setUser,
+                })
               }
               variant="contained"
               disabled={!username || !password || !firstName || !lastName}
@@ -98,10 +107,16 @@ function Registration() {
           <Link to="/login">Return to login</Link>
         </Typography>
       </Box>
-      {!!error && (
+      {!user?.id && !!error && (
         <Box m={2}>
-          <Alert variant="filled" severity="error">
-            {error}
+          <Alert severity="error">{error}</Alert>
+        </Box>
+      )}
+      {!!user?.id && (
+        <Box m={2}>
+          <Alert severity="success">
+            {`Welcome ${user.username} `}
+            <Link to="/login">Return to login</Link>
           </Alert>
         </Box>
       )}

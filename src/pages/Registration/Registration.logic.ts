@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { User } from "../../contexts/AuthContext/AuthContext";
 
 export function useRegistration() {
   const [username, setUserName] = useState("");
@@ -6,6 +7,7 @@ export function useRegistration() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState<string | undefined>(undefined);
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   return {
     username,
@@ -18,5 +20,7 @@ export function useRegistration() {
     setLastName,
     error,
     setError,
+    setUser,
+    user,
   };
 }
