@@ -81,9 +81,7 @@ function Login() {
       </Box>
       {!!error && (
         <Box m={2}>
-          <Alert variant="filled" severity="error">
-            {error}
-          </Alert>
+          <Alert severity="error">{error}</Alert>
         </Box>
       )}
     </>
