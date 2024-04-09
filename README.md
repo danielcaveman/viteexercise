@@ -10,6 +10,12 @@
 - yarn
 - yarn dev
 
+## Preview
+
+- yarn
+- yarn build
+- yarn preview
+
 ## Test
 
 - yarn test
