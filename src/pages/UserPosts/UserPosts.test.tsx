@@ -15,6 +15,7 @@ describe("UserPosts", () => {
       setPage: vi.fn(),
       totalPages: 0,
       user: user || null,
+      showPagination: true,
     });
 
     return renderComponent(
@@ -30,7 +31,7 @@ describe("UserPosts", () => {
     expect(getByText(/You are not logged/i)).toBeDefined();
   });
 
-  it("shows blabla", () => {
+  it("shows create your post page for logged user", () => {
     const user: User = {
       accessToken: "testuser",
       created: "testuser",
