@@ -19,3 +19,7 @@
 ## Test
 
 - yarn test
+
+## Notes
+
+- the firts step to create your posts and comments is registering your user and signing in
