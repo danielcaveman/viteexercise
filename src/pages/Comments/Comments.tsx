@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { useComments } from "./Comments.logic";
 import { ChangeEvent } from "react";
-import { createComment } from "../../services/CommentsService";
+import { createComment, deleteComment } from "../../services/CommentsService";
+import CommentComponent from "../../components/Comment/Comment";
 
 function Comments() {
   const { comment, setComment, postId, comments } = useComments();
@@ -32,8 +33,13 @@ function Comments() {
           label="Comment"
           value={comment}
         />
-        {comments?.map(({ content }) => (
-          <h1>{content}</h1>
+        {comments?.map(({ id, content, postId }) => (
+          <CommentComponent
+            key={id}
+            content={content}
+            postId={postId}
+            onDelete={() => id && deleteComment(id)}
+          />
         ))}
         <Button
           onClick={() =>

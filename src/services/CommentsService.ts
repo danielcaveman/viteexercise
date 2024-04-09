@@ -2,6 +2,7 @@ import { baseURL } from "../constants/constants";
 import { client } from "./AuthService";
 
 export type Comment = {
+  id?: number;
   postId?: number;
   content: string;
 };
@@ -36,6 +37,14 @@ export async function createComment(comment: {
 }) {
   try {
     await client.post(`${baseURL}/comments`, comment);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function deleteComment(commentId: number) {
+  try {
+    await client.delete(`${baseURL}/comments/${commentId}`);
   } catch (error) {
     console.error(error);
   }
