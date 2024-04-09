@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Comment, fetchComments } from "../../services/CommentsService";
+import {
+  Comment,
+  createComment,
+  deleteComment,
+  fetchComments,
+} from "../../services/CommentsService";
 
 export const useComments = () => {
   const { postId } = useParams();
@@ -20,5 +25,22 @@ export const useComments = () => {
     onFetchComments();
   }, [onFetchComments]);
 
-  return { comment, setComment, postId, comments };
+  const onCommentSubmit = async (comment: Comment) => {
+    await createComment(comment);
+    await onFetchComments();
+  };
+
+  const onCommentDelete = async (id: number) => {
+    await deleteComment(id);
+    await onFetchComments();
+  };
+
+  return {
+    comment,
+    setComment,
+    postId,
+    comments,
+    onCommentSubmit,
+    onCommentDelete,
+  };
 };

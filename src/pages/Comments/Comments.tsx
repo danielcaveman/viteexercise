@@ -3,11 +3,17 @@ import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { useComments } from "./Comments.logic";
 import { ChangeEvent } from "react";
-import { createComment, deleteComment } from "../../services/CommentsService";
 import CommentComponent from "../../components/Comment/Comment";
 
 function Comments() {
-  const { comment, setComment, postId, comments } = useComments();
+  const {
+    comment,
+    setComment,
+    postId,
+    comments,
+    onCommentDelete,
+    onCommentSubmit,
+  } = useComments();
   const navigate = useNavigate();
 
   return (
@@ -38,13 +44,13 @@ function Comments() {
             key={id}
             content={content}
             postId={postId}
-            onDelete={() => id && deleteComment(id)}
+            onDelete={() => id && onCommentDelete(id)}
           />
         ))}
         <Button
           onClick={() =>
             postId &&
-            createComment({ content: comment, postId: parseInt(postId) })
+            onCommentSubmit({ content: comment, postId: parseInt(postId) })
           }
         >
           Add Comment

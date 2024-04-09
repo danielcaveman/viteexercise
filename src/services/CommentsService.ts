@@ -31,10 +31,7 @@ export async function fetchComments({
   }
 }
 
-export async function createComment(comment: {
-  postId: number;
-  content: string;
-}) {
+export async function createComment(comment: Comment) {
   try {
     await client.post(`${baseURL}/comments`, comment);
   } catch (error) {
