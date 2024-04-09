@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchComments } from "../../services/CommentsService";
+import { Comment, fetchComments } from "../../services/CommentsService";
 
 export const useComments = () => {
   const { postId } = useParams();
   const [comment, setComment] = useState("");
 
-  useEffect(() => {
-    fetchComments({ postId: postId || "" });
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  const onFetchComments = useCallback(async () => {
+    const response = await fetchComments({ postId: postId || "" });
+
+    if (response?.comments) {
+      setComments(response?.comments);
+    }
   }, [postId]);
 
-  return { comment, setComment, postId };
+  useEffect(() => {
+    onFetchComments();
+  }, [onFetchComments]);
+
+  return { comment, setComment, postId, comments };
 };

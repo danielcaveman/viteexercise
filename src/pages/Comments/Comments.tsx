@@ -6,7 +6,7 @@ import { ChangeEvent } from "react";
 import { createComment } from "../../services/CommentsService";
 
 function Comments() {
-  const { comment, setComment, postId } = useComments();
+  const { comment, setComment, postId, comments } = useComments();
   const navigate = useNavigate();
 
   return (
@@ -32,6 +32,9 @@ function Comments() {
           label="Comment"
           value={comment}
         />
+        {comments?.map(({ content }) => (
+          <h1>{content}</h1>
+        ))}
         <Button
           onClick={() =>
             postId &&

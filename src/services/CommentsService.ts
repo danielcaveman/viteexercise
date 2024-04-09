@@ -1,7 +1,14 @@
 import { baseURL } from "../constants/constants";
 import { client } from "./AuthService";
 
-type FetchCommentResponse = {};
+export type Comment = {
+  postId?: number;
+  content: string;
+};
+
+type FetchCommentResponse = {
+  comments: Comment[];
+};
 
 export async function fetchComments({
   postId,
@@ -13,7 +20,11 @@ export async function fetchComments({
 
     const comments = response.data;
 
-    return comments;
+    const data: FetchCommentResponse = {
+      comments: comments.items,
+    };
+
+    return data;
   } catch (error) {
     console.error(error);
   }
